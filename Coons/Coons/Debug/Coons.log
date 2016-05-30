@@ -1,0 +1,4 @@
+﻿  Main.cpp
+LINK : warning LNK4098: conflit entre la bibliothÞque par dÚfaut 'MSVCRT' et les autres bibliothÞquesá; utilisez /NODEFAULTLIB:library
+  Coons.vcxproj -> D:\Users\Emerick Lecomte\Mes documents\GitHub\MathProject-Thematic\Coons\Debug\Coons.exe
+  Coons.vcxproj -> D:\Users\Emerick Lecomte\Mes documents\GitHub\MathProject-Thematic\Coons\Debug\Coons.pdb (Partial PDB)
