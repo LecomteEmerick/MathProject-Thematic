@@ -111,7 +111,7 @@ void KeyboardFunc(GLFWwindow* window, int key, int scancode, int action, int mod
 				std::cout << "Niveau d'iteration : " << iteration << "\n";
 			}
 			break;
-		case GLFW_KEY_M:
+		case GLFW_KEY_SEMICOLON:
 			if (action == GLFW_PRESS)
 			{
 				iteration = --iteration;
