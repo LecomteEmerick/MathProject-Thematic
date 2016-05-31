@@ -34,8 +34,14 @@ void Draw()
 
 	Landmark::Draw();
 
+	for (Spline s : splineList) {
+		//s.Chaitlin();
+		s.Draw();
+	}
+
 	for (Spline s : splineList)
 	{
+
 		s.Draw();
 	}
 
@@ -92,6 +98,11 @@ void KeyboardFunc(GLFWwindow* window, int key, int scancode, int action, int mod
 			Camera::Rot_X = 0.0f;
 			Camera::Rot_Y = 0.0f;
 			break;
+		case GLFW_KEY_C:
+			for (int i = 0; i < splineList.size(); ++i) {
+				splineList[i].Chaitlin();
+			}			
+			break;
 	}
 }
 
@@ -104,8 +115,11 @@ void MouseButtonFunc(GLFWwindow* window, int button, int action, int mods)
 	switch (button)
 	{
 		case(GLFW_MOUSE_BUTTON_1):
-			Utils::MouseScreenPosToWorldPos(mousePos_X, mousePos_Y, worldMouseX, worldMouseY, worldMouseZ);
-			splineList[0].AddVertex(Point(worldMouseX, -2 * Camera::Pos_Y + windowHeight - worldMouseY, worldMouseZ + depth));
+			if (action == GLFW_PRESS)
+			{
+				Utils::MouseScreenPosToWorldPos(mousePos_X, mousePos_Y, worldMouseX, worldMouseY, worldMouseZ);
+				splineList[0].AddVertex(Point(worldMouseX, -2 * Camera::Pos_Y + windowHeight - worldMouseY, worldMouseZ + depth));
+			}
 			break;
 		case(GLFW_MOUSE_BUTTON_2):
 			if (action == GLFW_PRESS)

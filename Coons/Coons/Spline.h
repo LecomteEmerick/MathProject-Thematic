@@ -12,11 +12,13 @@ public:
 	Spline();
 	void Spline::AddVertex(Point p);
 	void Spline::Draw();
+	void Spline::Chaitlin();
 	~Spline();
 
 	std::vector<Point> PointList;
 private:
 
 	std::vector<Point> vertex;
+	std::vector<Point> chaitlinVertex;
 };
 
