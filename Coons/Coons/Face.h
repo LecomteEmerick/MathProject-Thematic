@@ -15,16 +15,17 @@ public:
 		this->_point.push_back(T1.GetPoint_C());
 		this->_point.push_back(T2.GetPoint_C());
 	}
-	Face(Point a, Point b, Point c, Point d)
+	Face(Point& a, Point& b, Point& c, Point& d)
 	{
-		this->_point.push_back(a); this->_point.push_back(b); this->_point.push_back(c); this->_point.push_back(d);
+		this->_point.push_back(&a); this->_point.push_back(&b); this->_point.push_back(&c); this->_point.push_back(&d);
 		this->_first = &Triangle(a, b, c);
 		this->_second = &Triangle(c, b, d);
 	}
 	void Draw();
+	Point Face::GetBarycentre();
 	~Face() {}
 private:
 	Triangle* _first, *_second;
-	std::vector<Point> _point;
+	std::vector<Point*> _point;
 };
 

@@ -11,9 +11,9 @@ public:
 	void Draw();
 	~Triangle() {}
 
-	Point GetPoint_A() { return *this->_a; }
-	Point GetPoint_B() { return *this->_b; }
-	Point GetPoint_C() { return *this->_c; }
+	Point* GetPoint_A() { return this->_a; }
+	Point* GetPoint_B() { return this->_b; }
+	Point* GetPoint_C() { return this->_c; }
 
 private:
 	Point* _a, *_b, *_c;

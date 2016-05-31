@@ -50,6 +50,14 @@ void Spline::Draw()
 	glEnd();
 }
 
+void Spline::ChangeColorOfVertex(Color col)
+{
+	for (int i = 0; i < this->vertex.size(); ++i)
+	{
+		this->vertex[i]._Color = col;
+	}
+}
+
 void Spline::chaikin(int iteration) {
 	for (int j = 0; j < iteration;++j)
 	{ 

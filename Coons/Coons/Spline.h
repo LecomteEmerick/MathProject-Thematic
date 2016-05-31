@@ -15,6 +15,7 @@ public:
 	void Spline::Draw();
 	void Spline::chaikin(int iteration);
 	void Spline::coons();
+	void Spline::ChangeColorOfVertex(Color col);
 	~Spline();
 
 	std::vector<Point> PointList;

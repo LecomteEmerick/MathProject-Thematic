@@ -125,6 +125,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="OpenGl_Legacy.cpp" />
     <ClCompile Include="Spline.cpp" />
+    <ClCompile Include="SplineManager.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Utils.cpp" />
   </ItemGroup>
@@ -138,6 +139,7 @@
     <ClInclude Include="OpenGl_Legacy.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Spline.h" />
+    <ClInclude Include="SplineManager.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>

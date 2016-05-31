@@ -11,6 +11,7 @@
 #include "Spline.h"
 #include "Utils.h"
 #include "CommonPolygon.h"
+#include "SplineManager.h"
 
 #include "glm\gtc\matrix_transform.hpp"
 #include "glm\gtc\type_ptr.hpp"
@@ -20,7 +21,7 @@
 int windowWidth = 800;
 int windowHeight = 600;
 int depth = 800;
-int iteration = 0;
+int iteration = 1;
 
 GLFWwindow* window;
 bool isRunning = false;
@@ -30,7 +31,7 @@ double OnClickMousePosY;
 
 Cube* c;
 
-std::vector<Spline> splineList;
+SplineManager splineManager;
 
 void Draw()
 {
@@ -41,19 +42,30 @@ void Draw()
 
 	Landmark::Draw();
 
-	for (Spline s : splineList) {
-		//s.chaikin();
-		s.Draw();
-	}
+	splineManager.DrawSpline();
 
-	for (Spline s : splineList)
+	if (c != nullptr)
 	{
+		std::vector<Point> barycenters;
+ 		c->Draw();
+		//barycenters.push_back(c->F1.GetBarycentre());
+		//barycenters.push_back(c->F2.GetBarycentre());
+		//barycenters.push_back(c->F3.GetBarycentre());
+		barycenters.push_back(c->F4.GetBarycentre());
+		barycenters.push_back(c->F5.GetBarycentre());
+		barycenters.push_back(c->F6.GetBarycentre());
 
-		s.Draw();
+		glPointSize(10.0f);
+		glBegin(GL_POINTS);
+
+		for (int i = 0; i < barycenters.size(); ++i)
+		{
+			glColor3f(barycenters[i]._Color._Red, barycenters[i]._Color._Green, barycenters[i]._Color._Blue);
+			glVertex3f(barycenters[i]._x, barycenters[i]._y, barycenters[i]._z);
+		}
+
+		glEnd();
 	}
-
-	if(c != nullptr)
-		c->Draw();
 
 	glfwSwapBuffers(window);
 }
@@ -113,36 +125,46 @@ void KeyboardFunc(GLFWwindow* window, int key, int scancode, int action, int mod
 			Camera::Rot_Y = 0.0f;
 			break;
 		case GLFW_KEY_C:
-			for (int i = 0; i < splineList.size(); ++i) {
-				splineList[i].chaikin(iteration);
-			}			
+			splineManager.DoCheckInForAllSpline(iteration);		
 			break;
 		case GLFW_KEY_P:
-			if (action == GLFW_PRESS)
+			if (action == GLFW_PRESS && iteration < 15)
 			{
 				iteration = ++iteration;
 				std::cout << "Niveau d'iteration : " << iteration << "\n";
-				for (int i = 0; i < splineList.size(); ++i) {
-					splineList[i].chaikin(iteration);
-				}
+				splineManager.DoCheckInForAllSpline(iteration);
 			}
 			break;
 		case GLFW_KEY_SEMICOLON:
-			if (action == GLFW_PRESS)
+			if (action == GLFW_PRESS && iteration > 1)
 			{
 				iteration = --iteration;
 				std::cout << "Niveau d'iteration : " << iteration << "\n";
-				for (int i = 0; i < splineList.size(); ++i) {
-					splineList[i].chaikin(iteration);
-				}
+				splineManager.DoCheckInForAllSpline(iteration);
 			}
 			break;
 		case GLFW_KEY_X:
 			if (action == GLFW_PRESS)
-			{				
-				for (int i = 0; i < splineList.size(); ++i) {
-					splineList[i].coons();
-				}
+			{	
+				splineManager.DoCheckInForAllSpline(iteration);
+			}
+			break;
+		case GLFW_KEY_KP_ADD:
+			if (action == GLFW_PRESS)
+			{
+				splineManager.SelectSpline(1);
+			}
+			break;
+		case GLFW_KEY_KP_SUBTRACT:
+			if (action == GLFW_PRESS)
+			{
+				splineManager.SelectSpline(-1);
+			}
+			break;
+		case GLFW_KEY_O:
+			if (action == GLFW_PRESS)
+			{
+				splineManager.CreateSpline();
 			}
 			break;
 	}
@@ -160,7 +182,7 @@ void MouseButtonFunc(GLFWwindow* window, int button, int action, int mods)
 			if (action == GLFW_PRESS)
 			{
 				Utils::MouseScreenPosToWorldPos(mousePos_X, mousePos_Y, worldMouseX, worldMouseY, worldMouseZ);
-				splineList[0].AddVertex(Point(worldMouseX, -2 * Camera::Pos_Y - worldMouseY, worldMouseZ + depth));
+				splineManager.SplineManagerAddPointToCurrentSpline(Point(worldMouseX, -2 * Camera::Pos_Y - worldMouseY, worldMouseZ + depth));
 			}
 			break;
 		case(GLFW_MOUSE_BUTTON_2):
@@ -181,14 +203,18 @@ void MouseButtonFunc(GLFWwindow* window, int button, int action, int mods)
 int main(int argc, char* argv)
 {
 	std::cout << "Manuel : " << std::endl;
-	std::cout << " - zqsd pour bouger la caméra" << std::endl;
-	std::cout << " - v pour remettre la caméra de face" << std::endl;
+	std::cout << " - ZQSD pour bouger la camera" << std::endl;
+	std::cout << " - V pour remettre la camera de face" << std::endl;
 	std::cout << " ################################################" << std::endl;
 	std::cout << " #-------------------- CHAIKINS  ---------------#" << std::endl;
 	std::cout << " ################################################" << std::endl;
-	std::cout << " # - C pour appliquer l'algorithme--------------#" << std::endl;
-	std::cout << " # - P pour ajouter un niveau d'incrémentation--#" << std::endl;
-	std::cout << " # - M pour réduire un niveau d'incrémentation--#" << std::endl;
+	std::cout << " # - C pour appliquer l algorithme (Compute)----#" << std::endl;
+	std::cout << " # - P pour ajouter un niveau d incrementation--#" << std::endl;
+	std::cout << " # - M pour reduire un niveau d incrementation--#" << std::endl;
+	std::cout << " # - O pour creer un nouvelle spline -----------#" << std::endl;
+	std::cout << " # - O pour creer un nouvelle spline -----------#" << std::endl;
+	std::cout << " # - keypad + changer de spline courante -------#" << std::endl;
+	std::cout << " # - keypad - changer de spline courante -------#" << std::endl;
 	std::cout << " ################################################" << std::endl;
 	std::cout << "--- FIN ---" << std::endl;
 
@@ -242,10 +268,14 @@ int main(int argc, char* argv)
 	n.AddVertex(new Point(450, 390, 0));
 	n.AddVertex(new Point(520, 400, 0));
 	/*---------------------------------*/
-	splineList.push_back(s);
-	splineList.push_back(u);
-	splineList.push_back(v);
-	splineList.push_back(n);
+	//splineList.push_back(s);
+	//splineList.push_back(u);
+	//splineList.push_back(v);
+	//splineList.push_back(n);
+	splineManager.AddSpline(s);
+	splineManager.AddSpline(u);
+	splineManager.AddSpline(v);
+	splineManager.AddSpline(n);
 #else
 	c = new Cube(Point(0.0f, 0.0f, 0.0f), 100.0f);
 #endif
