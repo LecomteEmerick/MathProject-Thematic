@@ -120,6 +120,9 @@ void KeyboardFunc(GLFWwindow* window, int key, int scancode, int action, int mod
 			{
 				iteration = ++iteration;
 				std::cout << "Niveau d'iteration : " << iteration << "\n";
+				for (int i = 0; i < splineList.size(); ++i) {
+					splineList[i].chaikin(iteration);
+				}
 			}
 			break;
 		case GLFW_KEY_SEMICOLON:
@@ -127,6 +130,17 @@ void KeyboardFunc(GLFWwindow* window, int key, int scancode, int action, int mod
 			{
 				iteration = --iteration;
 				std::cout << "Niveau d'iteration : " << iteration << "\n";
+				for (int i = 0; i < splineList.size(); ++i) {
+					splineList[i].chaikin(iteration);
+				}
+			}
+			break;
+		case GLFW_KEY_X:
+			if (action == GLFW_PRESS)
+			{				
+				for (int i = 0; i < splineList.size(); ++i) {
+					splineList[i].coons();
+				}
 			}
 			break;
 	}
@@ -204,8 +218,31 @@ int main(int argc, char* argv)
 	glfwSetCursorPosCallback(window, &MouseMotionFunc);
 	glfwSetKeyCallback(window, &KeyboardFunc);
 
-	Spline s;
+	Spline s,u,v,n,click;
+	s.AddVertex(new Point(50, 100, 0));
+	s.AddVertex(new Point(100, 200, 0));
+	s.AddVertex(new Point(200, 300, 0));
+	s.AddVertex(new Point(300, 400, 0));
+	/*---------------------------------*/
+	u.AddVertex(new Point(50, 100, 0));
+	u.AddVertex(new Point(100, 110, 0));
+	u.AddVertex(new Point(200, 95, 0));
+	u.AddVertex(new Point(300, 90, 0));
+	/*---------------------------------*/
+	v.AddVertex(new Point(300, 90, 0));
+	v.AddVertex(new Point(320, 200, 0));
+	v.AddVertex(new Point(410, 300, 0));
+	v.AddVertex(new Point(520, 400, 0));
+	/*---------------------------------*/
+	n.AddVertex(new Point(300, 400, 0));
+	n.AddVertex(new Point(380, 420, 0));
+	n.AddVertex(new Point(450, 390, 0));
+	n.AddVertex(new Point(520, 400, 0));
+	/*---------------------------------*/
 	splineList.push_back(s);
+	splineList.push_back(u);
+	splineList.push_back(v);
+	splineList.push_back(n);
 
 	c = new Cube(Point(0.0f, 0.0f, 0.0f), 100.0f);
 	StartMainLoop();
