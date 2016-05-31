@@ -36,7 +36,7 @@ void Draw()
 	Landmark::Draw();
 
 	for (Spline s : splineList) {
-		//s.Chaitlin();
+		//s.chaikin();
 		s.Draw();
 	}
 
@@ -101,21 +101,21 @@ void KeyboardFunc(GLFWwindow* window, int key, int scancode, int action, int mod
 			break;
 		case GLFW_KEY_C:
 			for (int i = 0; i < splineList.size(); ++i) {
-				splineList[i].Chaitlin(iteration);
+				splineList[i].chaikin(iteration);
 			}			
 			break;
 		case GLFW_KEY_P:
 			if (action == GLFW_PRESS)
 			{
 				iteration = ++iteration;
-				std::cout << "Nombre d'itération : " << iteration << "\n";
+				std::cout << "Niveau d'iteration : " << iteration << "\n";
 			}
 			break;
 		case GLFW_KEY_M:
 			if (action == GLFW_PRESS)
 			{
 				iteration = --iteration;
-				std::cout << "Nombre d'itération : " << iteration << "\n";
+				std::cout << "Niveau d'iteration : " << iteration << "\n";
 			}
 			break;
 	}
@@ -156,6 +156,13 @@ int main(int argc, char* argv)
 	std::cout << "Manuel : " << std::endl;
 	std::cout << " - zqsd pour bouger la caméra" << std::endl;
 	std::cout << " - v pour remettre la caméra de face" << std::endl;
+	std::cout << " ################################################" << std::endl;
+	std::cout << " #-------------------- CHAIKINS  ---------------#" << std::endl;
+	std::cout << " ################################################" << std::endl;
+	std::cout << " # - C pour appliquer l'algorithme--------------#" << std::endl;
+	std::cout << " # - P pour ajouter un niveau d'incrémentation--#" << std::endl;
+	std::cout << " # - M pour réduire un niveau d'incrémentation--#" << std::endl;
+	std::cout << " ################################################" << std::endl;
 	std::cout << "--- FIN ---" << std::endl;
 
 
