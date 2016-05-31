@@ -1,5 +1,8 @@
-﻿  Spline.cpp
-d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\spline.cpp(45): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
-d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\spline.cpp(51): warning C4244: 'argument' : conversion de 'int' en 'GLfloat', perte possible de données
+﻿  Main.cpp
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(61): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(68): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(69): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(108): warning C4244: 'argument' : conversion de 'float' en 'int', perte possible de données
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(148): warning C4551: liste d'arguments manquante dans l'appel de fonction
   Coons.vcxproj -> D:\Users\Emerick Lecomte\Mes documents\GitHub\MathProject-Thematic\Coons\Debug\Coons.exe
   Coons.vcxproj -> D:\Users\Emerick Lecomte\Mes documents\GitHub\MathProject-Thematic\Coons\Debug\Coons.pdb (Partial PDB)
