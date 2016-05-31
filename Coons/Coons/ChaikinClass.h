@@ -8,13 +8,13 @@
 
 class ChaikinClass
 {
-	public:
+public:
 	ChaikinClass();
 	void ChaikinClass::ApplyChaikins();
 	void ChaikinClass::AddVertex(Point p);
 	~ChaikinClass();
 	std::vector<Point> PointList;
 
-	private:
+private:
 	std::vector<Point> vertex;
 };

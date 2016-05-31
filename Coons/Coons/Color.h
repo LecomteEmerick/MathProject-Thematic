@@ -7,5 +7,5 @@ public:
 	Color(float r, float g, float b) : _Red(r), _Green(g), _Blue(b) {}
 
 	float _Red, _Green, _Blue;
-
+	
 };

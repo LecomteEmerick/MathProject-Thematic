@@ -22,7 +22,7 @@ void Spline::Draw()
 	}
 	glEnd();
 
-	glBegin(GL_LINE_LOOP);
+	glBegin(GL_LINE_STRIP);
 	for (Point p : this->vertex)
 	{
 		glColor3f(p._Color._Red, p._Color._Green, p._Color._Blue);

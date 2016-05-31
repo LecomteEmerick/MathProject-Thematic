@@ -7,21 +7,25 @@
 #include "GLFW\glfw3.h"
 #include "glm\glm.hpp"
 
+#include "Shape.h"
 #include "Spline.h"
 #include "Utils.h"
+#include "CommonPolygon.h"
 
 #include "glm\gtc\matrix_transform.hpp"
 #include "glm\gtc\type_ptr.hpp"
 
 int windowWidth = 800;
 int windowHeight = 600;
-int depth = 800;
+float depth = 800;
 
 GLFWwindow* window;
 bool isRunning = false;
 bool RotateCamera = false;
 double OnClickMousePosX;
 double OnClickMousePosY;
+
+Cube* c;
 
 std::vector<Spline> splineList;
 
@@ -38,6 +42,8 @@ void Draw()
 	{
 		s.Draw();
 	}
+
+	c->Draw();
 
 	glfwSwapBuffers(window);
 }
@@ -58,7 +64,12 @@ void StartMainLoop()
 }
 
 void MouseWheelFunc(GLFWwindow* window, double x, double y) {
-	Camera::Pos_Z += y * Camera::Speed;
+
+	c->Scale += y * Camera::ZoomFactor;;
+	c->SetScale(c->Scale);
+
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadMatrixf(glm::value_ptr(glm::perspective(45.0f * Camera::ZoomFactor, (float)windowWidth / (float)windowHeight, 0.01f, 200.0f)));
 }
 
 void MouseMotionFunc(GLFWwindow* window, double x, double y)
@@ -104,8 +115,11 @@ void MouseButtonFunc(GLFWwindow* window, int button, int action, int mods)
 	switch (button)
 	{
 		case(GLFW_MOUSE_BUTTON_1):
-			Utils::MouseScreenPosToWorldPos(mousePos_X, mousePos_Y, worldMouseX, worldMouseY, worldMouseZ);
-			splineList[0].AddVertex(Point(worldMouseX, -2 * Camera::Pos_Y + windowHeight - worldMouseY, worldMouseZ + depth));
+			if (action == GLFW_PRESS)
+			{
+				Utils::MouseScreenPosToWorldPos(mousePos_X, mousePos_Y, worldMouseX, worldMouseY, worldMouseZ);
+				splineList[0].AddVertex(Point(worldMouseX, -2 * Camera::Pos_Y - worldMouseY, worldMouseZ + depth));
+			}
 			break;
 		case(GLFW_MOUSE_BUTTON_2):
 			if (action == GLFW_PRESS)
@@ -143,12 +157,14 @@ int main(int argc, char* argv)
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity;
+	//glLoadMatrixf(glm::value_ptr(glm::perspective(45.0f * Camera::ZoomFactor, (float)windowWidth / (float)windowHeight, depth, -depth)));
 
 	glViewport(0, 0, (GLsizei)windowWidth, (GLsizei)windowHeight);
-	glOrtho(0, windowWidth, windowHeight, 0, depth, -depth);
+	glOrtho(-windowWidth, windowWidth, windowHeight, -windowHeight, depth, -depth);
 
 	glfwSetScrollCallback(window, &MouseWheelFunc);
 	glfwSetMouseButtonCallback(window, &MouseButtonFunc);
@@ -158,7 +174,10 @@ int main(int argc, char* argv)
 	Spline s;
 	splineList.push_back(s);
 
+	c = new Cube(Point(0.0f, 0.0f, 0.0f), 100.0f);
 	StartMainLoop();
+
+	delete c;
 
 	return 0;
 }

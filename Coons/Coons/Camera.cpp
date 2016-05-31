@@ -10,6 +10,21 @@ float Camera::Rot_Y;
 float Camera::Rot_Z;
 float Camera::Speed = 10.0f;
 float Camera::AngleSpeed = 0.1f;
+float Camera::ZoomFactor = 10.0f;
+//
+//void Camera::Add_Zoom_Factor(float value)
+//{
+//	ZoomFactor += value;
+//
+//	if (ZoomFactor > 40.0f)
+//	{
+//		ZoomFactor = 40.0f;
+//	}
+//	if (ZoomFactor < -40.0f)
+//	{
+//		ZoomFactor = -40.0f;
+//	}
+//}
 
 void Camera::SetRot_X(float angle)
 {

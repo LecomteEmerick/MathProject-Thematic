@@ -2,6 +2,14 @@
 #include "GL\glew.h"
 #include "OpenGl_Legacy.h"
 
+const Color Utils::White(1.0f, 1.0f, 1.0f);
+const Color Utils::Black(0.0f, 0.0f, 0.0f);
+const Color Utils::Red(1.0f, 0.0f, 0.0f);
+const Color Utils::Green(0.0f, 1.0f, 0.0f);
+const Color Utils::Blue(0.0f, 0.0f, 1.0f);
+const Color Utils::Yellow(1.0f, 1.0f, 0.0f);
+const Color Utils::Cyan(0.0f, 1.0f, 1.0f);
+const Color Utils::Magenta(1.0f, 0.0f, 1.0f);
 
 void Utils::MouseScreenPosToWorldPos(double mouseX, double mouseY, float &posX, float &posY, float &posZ)
 {
