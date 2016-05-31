@@ -117,14 +117,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="common\EsgiShader.cpp" />
+    <ClCompile Include="Landmark.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="OpenGl_Legacy.cpp" />
     <ClCompile Include="Spline.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="Landmark.h" />
+    <ClInclude Include="OpenGl_Legacy.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Spline.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

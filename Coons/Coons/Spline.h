@@ -16,14 +16,7 @@ public:
 
 	std::vector<Point> PointList;
 private:
-	//void			ConstructEBO();
-	//void			ConstructVBO();
-	//GLuint			EBO;
-	//GLuint			VBO;
-	//GLuint			ShaderProgram;
-	//EsgiShader		Shader;
 
 	std::vector<Point> vertex;
-	//std::vector<int> indices;
 };
 
