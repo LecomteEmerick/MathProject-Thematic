@@ -1,11 +1,11 @@
 ﻿  Main.cpp
-d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(75): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
-d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(86): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(87): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
-d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(114): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(123): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(133): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(141): warning C4018: '<' : incompatibilité signed/unsigned
-d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(210): warning C4551: liste d'arguments manquante dans l'appel de fonction
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(78): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(88): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(89): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(116): warning C4018: '<' : incompatibilité signed/unsigned
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(125): warning C4018: '<' : incompatibilité signed/unsigned
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(135): warning C4018: '<' : incompatibilité signed/unsigned
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(143): warning C4018: '<' : incompatibilité signed/unsigned
+d:\users\emerick lecomte\mes documents\github\mathproject-thematic\coons\coons\main.cpp(212): warning C4551: liste d'arguments manquante dans l'appel de fonction
   Coons.vcxproj -> D:\Users\Emerick Lecomte\Mes documents\GitHub\MathProject-Thematic\Coons\Debug\Coons.exe
   Coons.vcxproj -> D:\Users\Emerick Lecomte\Mes documents\GitHub\MathProject-Thematic\Coons\Debug\Coons.pdb (Partial PDB)

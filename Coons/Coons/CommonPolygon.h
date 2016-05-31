@@ -38,8 +38,7 @@ private:
 
 
 public:
-	Point Center;
-	float Scale;
+	float baseScale, currentScale;
 
 	Face F1 = Face(T1, T2);
 	Face F2 = Face(T3, T4);
@@ -50,18 +49,23 @@ public:
 
 	void Cube::SetTransformPosition(Point center)
 	{
-		this->Center = center;
 		a = basic_a + center; b = basic_b + center; c = basic_c + center; d = basic_d + center; e = basic_e + center; f = basic_f + center; g = basic_g + center; h = basic_h + center;
 	}
 
 	void Cube::SetScale(float scale)
 	{
-		this->Scale = scale;
-		a = basic_a * scale; b = basic_b * scale; c = basic_c * scale; d = basic_d * scale; e = basic_e * scale; f = basic_f * scale; g = basic_g * scale; h = basic_h * scale;
+		currentScale += scale;
+		if (currentScale > 10.0f)
+		{
+			a = basic_a * currentScale; b = basic_b * currentScale; c = basic_c * currentScale; d = basic_d * currentScale;
+			e = basic_e * currentScale; f = basic_f * currentScale; g = basic_g * currentScale; h = basic_h * currentScale;
+		}
 	}
 
 	Cube() : a(basic_a), b(basic_b), c(basic_c), d(basic_d), e(basic_e), f(basic_f), g(basic_g), h(basic_h) {}
 	Cube(Point center, float scale) { 
+		this->baseScale = scale;
+		currentScale = this->baseScale;
 		SetTransformPosition(center);
 		SetScale(scale);
 	}

@@ -15,6 +15,8 @@
 #include "glm\gtc\matrix_transform.hpp"
 #include "glm\gtc\type_ptr.hpp"
 
+#define SPLINE_DEBUG
+
 int windowWidth = 800;
 int windowHeight = 600;
 int depth = 800;
@@ -50,7 +52,8 @@ void Draw()
 		s.Draw();
 	}
 
-	c->Draw();
+	if(c != nullptr)
+		c->Draw();
 
 	glfwSwapBuffers(window);
 }
@@ -72,8 +75,7 @@ void StartMainLoop()
 
 void MouseWheelFunc(GLFWwindow* window, double x, double y) {
 
-	c->Scale += y * Camera::ZoomFactor;;
-	c->SetScale(c->Scale);
+	c->SetScale(y * Camera::ZoomFactor);
 
 	//glMatrixMode(GL_PROJECTION);
 	//glLoadMatrixf(glm::value_ptr(glm::perspective(45.0f * Camera::ZoomFactor, (float)windowWidth / (float)windowHeight, 0.01f, 200.0f)));
@@ -84,7 +86,7 @@ void MouseMotionFunc(GLFWwindow* window, double x, double y)
 	if(RotateCamera)
 	{
 		Camera::SetRot_X(Camera::AngleSpeed * -(OnClickMousePosX - x));
-		Camera::SetRot_Y(Camera::AngleSpeed * (OnClickMousePosY - y));
+		Camera::SetRot_Y(Camera::AngleSpeed * -(OnClickMousePosY - y));
 		OnClickMousePosX = x;
 		OnClickMousePosY = y;
 	}
@@ -211,13 +213,14 @@ int main(int argc, char* argv)
 	//glLoadMatrixf(glm::value_ptr(glm::perspective(45.0f * Camera::ZoomFactor, (float)windowWidth / (float)windowHeight, depth, -depth)));
 
 	glViewport(0, 0, (GLsizei)windowWidth, (GLsizei)windowHeight);
-	glOrtho(-windowWidth, windowWidth, windowHeight, -windowHeight, depth, -depth);
+	glOrtho(-windowWidth, windowWidth, -windowHeight, windowHeight, depth, -depth);
 
 	glfwSetScrollCallback(window, &MouseWheelFunc);
 	glfwSetMouseButtonCallback(window, &MouseButtonFunc);
 	glfwSetCursorPosCallback(window, &MouseMotionFunc);
 	glfwSetKeyCallback(window, &KeyboardFunc);
 
+#ifdef SPLINE_DEBUG
 	Spline s,u,v,n,click;
 	s.AddVertex(new Point(50, 100, 0));
 	s.AddVertex(new Point(100, 200, 0));
@@ -243,8 +246,9 @@ int main(int argc, char* argv)
 	splineList.push_back(u);
 	splineList.push_back(v);
 	splineList.push_back(n);
-
+#else
 	c = new Cube(Point(0.0f, 0.0f, 0.0f), 100.0f);
+#endif
 	StartMainLoop();
 
 	delete c;
