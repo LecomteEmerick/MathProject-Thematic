@@ -90,6 +90,10 @@ void Spline::chaikin(int iteration) {
 	}
 }
 
+void Spline::coons() {
+	
+}
+
 Spline::~Spline()
 {
 }

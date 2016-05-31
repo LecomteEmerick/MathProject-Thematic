@@ -13,6 +13,7 @@ public:
 	void Spline::AddVertex(Point p);
 	void Spline::Draw();
 	void Spline::chaikin(int iteration);
+	void Spline::coons();
 	~Spline();
 
 	std::vector<Point> PointList;
