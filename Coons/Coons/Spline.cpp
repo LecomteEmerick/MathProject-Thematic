@@ -6,8 +6,11 @@ Spline::Spline()
 
 void Spline::AddVertex(Point p)
 {
-
 	this->vertex.push_back(p);
+}
+
+void Spline::addSpline(Spline s) {
+	this->splineVector.push_back(s);
 }
 
 void Spline::Draw()
@@ -91,7 +94,11 @@ void Spline::chaikin(int iteration) {
 }
 
 void Spline::coons() {
-	
+	//Interpolation lineaire AB + Interpolation lineaire de CD - interpolation billineaire de ABCD
+	Point interpolationX, interpolationY, Birpolation;
+	for (int i = 0; i < (int)splineVector.size(); ++i) {
+		
+	}
 }
 
 Spline::~Spline()

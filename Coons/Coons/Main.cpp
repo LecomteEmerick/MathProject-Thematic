@@ -219,23 +219,23 @@ int main(int argc, char* argv)
 	glfwSetKeyCallback(window, &KeyboardFunc);
 
 	Spline s,u,v,n,click;
-	s.AddVertex(new Point(50, 100, 0));
-	s.AddVertex(new Point(100, 200, 0));
-	s.AddVertex(new Point(200, 300, 0));
-	s.AddVertex(new Point(300, 400, 0));
+	s.AddVertex(new Point(50, 100, 10));
+	s.AddVertex(new Point(100, 200, 20));
+	s.AddVertex(new Point(200, 300, -25));
+	s.AddVertex(new Point(300, 400, 8));
 	/*---------------------------------*/
-	u.AddVertex(new Point(50, 100, 0));
-	u.AddVertex(new Point(100, 110, 0));
-	u.AddVertex(new Point(200, 95, 0));
-	u.AddVertex(new Point(300, 90, 0));
+	u.AddVertex(new Point(50, 100, 5));
+	u.AddVertex(new Point(100, 110, 12));
+	u.AddVertex(new Point(200, 95, -25));
+	u.AddVertex(new Point(300, 90, 21));
 	/*---------------------------------*/
 	v.AddVertex(new Point(300, 90, 0));
-	v.AddVertex(new Point(320, 200, 0));
+	v.AddVertex(new Point(320, 200, 35));
 	v.AddVertex(new Point(410, 300, 0));
 	v.AddVertex(new Point(520, 400, 0));
 	/*---------------------------------*/
 	n.AddVertex(new Point(300, 400, 0));
-	n.AddVertex(new Point(380, 420, 0));
+	n.AddVertex(new Point(380, 420, 20));
 	n.AddVertex(new Point(450, 390, 0));
 	n.AddVertex(new Point(520, 400, 0));
 	/*---------------------------------*/
