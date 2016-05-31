@@ -16,6 +16,7 @@
 int windowWidth = 800;
 int windowHeight = 600;
 int depth = 800;
+int iteration = 0;
 
 GLFWwindow* window;
 bool isRunning = false;
@@ -100,8 +101,22 @@ void KeyboardFunc(GLFWwindow* window, int key, int scancode, int action, int mod
 			break;
 		case GLFW_KEY_C:
 			for (int i = 0; i < splineList.size(); ++i) {
-				splineList[i].Chaitlin();
+				splineList[i].Chaitlin(iteration);
 			}			
+			break;
+		case GLFW_KEY_P:
+			if (action == GLFW_PRESS)
+			{
+				iteration = ++iteration;
+				std::cout << "Nombre d'itération : " << iteration << "\n";
+			}
+			break;
+		case GLFW_KEY_M:
+			if (action == GLFW_PRESS)
+			{
+				iteration = --iteration;
+				std::cout << "Nombre d'itération : " << iteration << "\n";
+			}
 			break;
 	}
 }

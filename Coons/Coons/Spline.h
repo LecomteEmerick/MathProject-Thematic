@@ -12,7 +12,7 @@ public:
 	Spline();
 	void Spline::AddVertex(Point p);
 	void Spline::Draw();
-	void Spline::Chaitlin();
+	void Spline::Chaitlin(int iteration);
 	~Spline();
 
 	std::vector<Point> PointList;
@@ -20,5 +20,6 @@ private:
 
 	std::vector<Point> vertex;
 	std::vector<Point> chaitlinVertex;
+	std::vector<Point> iteratorVector;
 };
 
