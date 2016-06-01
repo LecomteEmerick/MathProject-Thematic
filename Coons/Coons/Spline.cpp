@@ -52,16 +52,32 @@ void Spline::Draw()
 	//}
 	//glEnd();
 
-	glBegin(GL_POINTS);
-	for (Point p : this->coonsVector1)
-	{
-		glColor3f(p._Color._Red, p._Color._Green, p._Color._Blue);
-		glVertex3f(p._x, p._y, p._z);
-	}
-	glEnd();
+	//glBegin(GL_POINTS);
+	//for (Point p : this->coonsVector1)
+	//{
+	//	glColor3f(p._Color._Red, p._Color._Green, p._Color._Blue);
+	//	glVertex3f(p._x, p._y, p._z);
+	//}
+	//glEnd();
+
+	//glBegin(GL_POINTS);
+	//for (Point p : this->coonsVector2)
+	//{
+	//	glColor3f(p._Color._Red, p._Color._Green, p._Color._Blue);
+	//	glVertex3f(p._x, p._y, p._z);
+	//}
+	//glEnd();
+
+	//glBegin(GL_POINTS);
+	//for (Point p : this->TempCoonVec)
+	//{
+	//	glColor3f(p._Color._Red, p._Color._Green, p._Color._Blue);
+	//	glVertex3f(p._x, p._y, p._z);
+	//}
+	//glEnd();
 
 	glBegin(GL_POINTS);
-	for (Point p : this->TempCoonVec)
+	for (Point p : this->CoonPatchVector)
 	{
 		glColor3f(p._Color._Red, p._Color._Green, p._Color._Blue);
 		glVertex3f(p._x, p._y, p._z);
@@ -129,8 +145,8 @@ void Spline::coons() {
 	splineVector = SplineManager::SplineList;
 	//Interpolation lineaire AB
 	int count=0;
-	for (int i = 0; i < ((int)this->vertex.size())-1;i++) {
-		for (float inc = 0; inc <= 1; inc=inc+iter) {
+	for (int i = 0; i < ((int)this->vertex.size());i++) {
+		for (float inc = 0; inc < 1; inc=inc+iter) {
 			count++;
 			temp._x = (1 - inc)*splineVector[1].vertex[i]._x + inc*splineVector[3].vertex[i]._x;
 			temp._y = (1 - inc)*splineVector[1].vertex[i]._y + inc*splineVector[3].vertex[i]._y;
@@ -138,27 +154,34 @@ void Spline::coons() {
 			coonsVector1.push_back(temp);
 		}
 		//Interpolation lineaire CD
-		for (float inc = i; inc <= 1; inc = inc + iter) {
+		for (float inc = 0; inc < 1; inc = inc + iter) {
 			temp._x = (1 - inc)*splineVector[0].vertex[i]._x + inc*splineVector[2].vertex[i]._x;
 			temp._y = (1 - inc)*splineVector[0].vertex[i]._y + inc*splineVector[2].vertex[i]._y;
 			temp._z = (1 - inc)*splineVector[0].vertex[i]._z + inc*splineVector[2].vertex[i]._z;
-			coonsVector1.push_back(temp);
+			coonsVector2.push_back(temp);
 		}
 	}
-
-	for (int i = 0; i < ((int)this->vertex.size()) - 1; i++)
+	//bilinear interpolation
+	for (float i = 0; i < this->vertex.size(); ++i)
 	{
-		for (int j = i; j < ((int)this->vertex.size())-1; ++j)
+		for (float j = 0; j < this->vertex.size(); ++j)
 		{
 			Point _pp;
 			float t = i / vertex.size() - 1;
 			float s = j / vertex.size() - 1;
-			_pp._x = vertex[i]._x * (1 - s)*(1 - t) + vertex[3]._x * s * (1 - t) + vertex[i]._x * (1 - s)*t + vertex[3]._x * s * t;
-			_pp._x = vertex[i]._x * (1 - s)*(1 - t) + vertex[3]._x * s * (1 - t) +vertex[i]._x * (1 - s)*t + vertex[3]._x * s * t;
-			_pp._x = vertex[i]._x * (1 - s)*(1 - t) + vertex[3]._x * s * (1 - t) +vertex[i]._x * (1 - s)*t + vertex[3]._x * s * t;
+			_pp._x = splineVector[1].vertex[0]._x * (1 - s)*(1 - t) + splineVector[3].vertex[0]._x * s * (1 - t) + splineVector[0].vertex[3]._x * (1 - s)*t + splineVector[3].vertex[3]._x * s * t;
+			_pp._x = splineVector[1].vertex[0]._x * (1 - s)*(1 - t) + splineVector[3].vertex[0]._x * s * (1 - t) + splineVector[0].vertex[3]._x * (1 - s)*t + splineVector[3].vertex[3]._x * s * t;
+			_pp._x = splineVector[1].vertex[0]._x * (1 - s)*(1 - t) + splineVector[3].vertex[0]._x * s * (1 - t) + splineVector[0].vertex[3]._x * (1 - s)*t + splineVector[3].vertex[3]._x * s * t;
 			TempCoonVec.push_back(_pp);
 		};
-		//coonsVector3.push_back(TempCoonVec);
+	}
+	for (int i = 0; i < coonsVector1.size(); ++i)
+	{
+			Point _pp;
+			_pp._x = coonsVector1[i]._x + coonsVector2[i]._x - TempCoonVec[i]._x;
+			_pp._y = coonsVector1[i]._y + coonsVector2[i]._y - TempCoonVec[i]._y;
+			_pp._z = coonsVector1[i]._z + coonsVector2[i]._z - TempCoonVec[i]._z;
+			CoonPatchVector.push_back(_pp);
 	}
 }
 

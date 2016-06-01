@@ -21,7 +21,7 @@ public:
 	std::vector<Point> PointList;
 private:
 	std::vector<Point> TempCoonVec;
-	std::vector<Point> coonsVector3;
+	std::vector<Point> CoonPatchVector;
 	std::vector<Point> coonsVector2;
 	std::vector<Point> coonsVector1;
 	std::vector<Point> vertex;
