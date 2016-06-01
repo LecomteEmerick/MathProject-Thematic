@@ -129,26 +129,26 @@ void Spline::coons() {
 	splineVector = SplineManager::SplineList;
 	//Interpolation lineaire AB
 	int count=0;
-	for (int i = 0; i < ((int)this->splineVector.size())-1;i++) {
+	for (int i = 0; i < ((int)this->vertex.size())-1;i++) {
 		for (float inc = 0; inc <= 1; inc=inc+iter) {
 			count++;
-			temp._x = (1 - inc)*splineVector[0].vertex[i]._x + inc*splineVector[2].vertex[i]._x;
-			temp._y = (1 - inc)*splineVector[0].vertex[i]._y + inc*splineVector[2].vertex[i]._y;
-			temp._z = (1 - inc)*splineVector[0].vertex[i]._z + inc*splineVector[2].vertex[i]._z;
-			coonsVector1.push_back(temp);
-		}
-		//Interpolation lineaire CD
-		for (float inc = i; inc <= 1; inc = inc + iter) {
 			temp._x = (1 - inc)*splineVector[1].vertex[i]._x + inc*splineVector[3].vertex[i]._x;
 			temp._y = (1 - inc)*splineVector[1].vertex[i]._y + inc*splineVector[3].vertex[i]._y;
 			temp._z = (1 - inc)*splineVector[1].vertex[i]._z + inc*splineVector[3].vertex[i]._z;
 			coonsVector1.push_back(temp);
 		}
+		//Interpolation lineaire CD
+		for (float inc = i; inc <= 1; inc = inc + iter) {
+			temp._x = (1 - inc)*splineVector[0].vertex[i]._x + inc*splineVector[2].vertex[i]._x;
+			temp._y = (1 - inc)*splineVector[0].vertex[i]._y + inc*splineVector[2].vertex[i]._y;
+			temp._z = (1 - inc)*splineVector[0].vertex[i]._z + inc*splineVector[2].vertex[i]._z;
+			coonsVector1.push_back(temp);
+		}
 	}
 
-	for (int i = 0; i < ((int)this->splineVector.size()) - 1; i++)
+	for (int i = 0; i < ((int)this->vertex.size()) - 1; i++)
 	{
-		for (int j = i; j < ((int)this->splineVector.size())-1; ++j)
+		for (int j = i; j < ((int)this->vertex.size())-1; ++j)
 		{
 			Point _pp;
 			float t = i / vertex.size() - 1;
