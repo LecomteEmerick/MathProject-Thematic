@@ -1,5 +1,5 @@
 #include "SplineManager.h"
-
+std::vector<Spline> SplineManager::SplineList;
 #include "Utils.h"
 
 void SplineManager::CreateSpline()
@@ -29,6 +29,11 @@ void SplineManager::DoCheckInForAllSpline(int iteration)
 {
 	for(int i=0; i < this->SplineList.size(); ++i)
 		this->SplineList[i].chaikin(iteration);
+		
+}
+
+int SplineManager::SizeList(){
+	return SplineList.size();
 }
 
 void SplineManager::DrawSpline()

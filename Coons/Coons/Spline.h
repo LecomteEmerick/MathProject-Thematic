@@ -20,9 +20,14 @@ public:
 
 	std::vector<Point> PointList;
 private:
-	std::vector<Spline> splineVector;
+	std::vector<Point> TempCoonVec;
+	std::vector<Point> coonsVector3;
+	std::vector<Point> coonsVector2;
+	std::vector<Point> coonsVector1;
 	std::vector<Point> vertex;
 	std::vector<Point> chaikinVertex;
 	std::vector<Point> iteratorVector;
+
+	std::vector<Spline> splineVector;
 };
 

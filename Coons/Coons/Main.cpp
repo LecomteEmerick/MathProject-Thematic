@@ -31,7 +31,7 @@ double OnClickMousePosY;
 
 Cube* c;
 
-SplineManager splineManager;
+static SplineManager splineManager;
 
 void Draw()
 {
@@ -76,7 +76,7 @@ void StartMainLoop()
 	while (isRunning)
 	{
 		glfwPollEvents();
-
+		
 		Draw();
 
 		if (glfwWindowShouldClose(window))
@@ -126,6 +126,7 @@ void KeyboardFunc(GLFWwindow* window, int key, int scancode, int action, int mod
 			break;
 		case GLFW_KEY_C:
 			splineManager.DoCheckInForAllSpline(iteration);		
+			
 			break;
 		case GLFW_KEY_P:
 			if (action == GLFW_PRESS && iteration < 15)
@@ -256,7 +257,7 @@ int main(int argc, char* argv)
 	u.AddVertex(new Point(50, 100, 5));
 	u.AddVertex(new Point(100, 110, 12));
 	u.AddVertex(new Point(200, 95, -25));
-	u.AddVertex(new Point(300, 90, 21));
+	u.AddVertex(new Point(300, 90, 0));
 	/*---------------------------------*/
 	v.AddVertex(new Point(300, 90, 0));
 	v.AddVertex(new Point(320, 200, 35));
@@ -268,10 +269,6 @@ int main(int argc, char* argv)
 	n.AddVertex(new Point(450, 390, 0));
 	n.AddVertex(new Point(520, 400, 0));
 	/*---------------------------------*/
-	//splineList.push_back(s);
-	//splineList.push_back(u);
-	//splineList.push_back(v);
-	//splineList.push_back(n);
 	splineManager.AddSpline(s);
 	splineManager.AddSpline(u);
 	splineManager.AddSpline(v);
@@ -280,7 +277,7 @@ int main(int argc, char* argv)
 	c = new Cube(Point(0.0f, 0.0f, 0.0f), 100.0f);
 #endif
 	StartMainLoop();
-
+	s.coons();
 	delete c;
 
 	return 0;

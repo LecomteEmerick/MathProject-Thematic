@@ -13,9 +13,12 @@ public:
 	void DoCheckInForAllSpline(int iteration);
 	void DrawSpline();
 	void SelectSpline(int step);
+	int SizeList();
 	~SplineManager() {}
+
+	static std::vector<Spline> SplineList;
+	
 private:
 	int indexCurrentSpline = 0;
-	std::vector<Spline> SplineList;
 };
 
