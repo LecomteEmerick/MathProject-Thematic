@@ -75,7 +75,7 @@ void Spline::Draw()
 	//	glVertex3f(p._x, p._y, p._z);
 	//}
 	//glEnd();
-
+//
 	glBegin(GL_POINTS);
 	for (Point p : this->CoonPatchVector)
 	{
@@ -162,16 +162,16 @@ void Spline::coons() {
 		}
 	}
 	//bilinear interpolation
-	for (float i = 0; i < this->vertex.size(); ++i)
+	for (int i = 0; i < this->vertex.size(); ++i)
 	{
-		for (float j = 0; j < this->vertex.size(); ++j)
+		for (int j = 0; j < this->vertex.size(); ++j)
 		{
 			Point _pp;
-			float t = i / vertex.size() - 1;
-			float s = j / vertex.size() - 1;
-			_pp._x = splineVector[1].vertex[0]._x * (1 - s)*(1 - t) + splineVector[3].vertex[0]._x * s * (1 - t) + splineVector[0].vertex[3]._x * (1 - s)*t + splineVector[3].vertex[3]._x * s * t;
-			_pp._x = splineVector[1].vertex[0]._x * (1 - s)*(1 - t) + splineVector[3].vertex[0]._x * s * (1 - t) + splineVector[0].vertex[3]._x * (1 - s)*t + splineVector[3].vertex[3]._x * s * t;
-			_pp._x = splineVector[1].vertex[0]._x * (1 - s)*(1 - t) + splineVector[3].vertex[0]._x * s * (1 - t) + splineVector[0].vertex[3]._x * (1 - s)*t + splineVector[3].vertex[3]._x * s * t;
+			float t = (float)i / (vertex.size() - 1);
+			float s = (float)j / (vertex.size() - 1);
+			_pp._x = splineVector[1].vertex[0]._x * (1 - s)*(1 - t) + splineVector[1].vertex[3]._x * s * (1 - t) + splineVector[3].vertex[0]._x * (1 - s)*t + splineVector[3].vertex[3]._x * s * t;
+			_pp._y = splineVector[1].vertex[0]._y * (1 - s)*(1 - t) + splineVector[1].vertex[3]._y * s * (1 - t) + splineVector[3].vertex[0]._y * (1 - s)*t + splineVector[3].vertex[3]._y * s * t;
+			_pp._z = splineVector[1].vertex[0]._z * (1 - s)*(1 - t) + splineVector[1].vertex[3]._z * s * (1 - t) + splineVector[3].vertex[0]._z * (1 - s)*t + splineVector[3].vertex[3]._z * s * t;
 			TempCoonVec.push_back(_pp);
 		};
 	}
