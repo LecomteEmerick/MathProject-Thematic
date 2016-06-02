@@ -76,6 +76,25 @@ void Spline::Draw()
 	//}
 	//glEnd();
 //
+	//glBegin(GL_POINTS);
+	//for (Point p : this->coonsVector1)
+	//{
+	//	glColor3f(p._Color._Red, p._Color._Green, p._Color._Blue);
+	//	glVertex3f(p._x, p._y, p._z);
+	//}
+	//glEnd();
+
+
+	//if (splineVector.size() > 1)
+	//{
+	//	glBegin(GL_POINTS);
+	//	glColor3f(0.0, 0.0, 1.0);
+	//	glVertex3f(splineVector[0].vertex[3]._x, splineVector[0].vertex[3]._y, splineVector[0].vertex[3]._z);
+	//	glColor3f(0.0, 1.0, 1.0);																																			
+	//	glVertex3f(splineVector[2].vertex[3]._x, splineVector[2].vertex[3]._y, splineVector[2].vertex[3]._z);
+	//	glEnd();
+	//}
+
 	glBegin(GL_POINTS);
 	for (Point p : this->CoonPatchVector)
 	{
@@ -83,6 +102,38 @@ void Spline::Draw()
 		glVertex3f(p._x, p._y, p._z);
 	}
 	glEnd();
+
+
+	//int i = 0;
+	//for (Point p : this->CoonPatchVector)
+	//{
+	//	if(i == 0)
+	//		glBegin(GL_LINE_STRIP);
+	//	++i;
+	//	glColor3f(0.0, 0.0,1.0);
+	//	glVertex3f(p._x, p._y, p._z);
+	//	if (i == 4) {
+	//		glEnd();
+	//		i = 0;
+	//	}
+	//}
+	//i = 0;
+	//int j = 1;
+	//for (int k = 0; k < this->CoonPatchVector.size(); ++k)
+	//{
+	//	if (k % 4 == 0)
+	//		j++;
+	//	int leNombre = (k % 4) * j;
+	//	if (i == 0)
+	//		glBegin(GL_LINE_STRIP);
+	//	++i;
+	//	glColor3f(0.0,1.0,1.0);
+	//	glVertex3f(this->CoonPatchVector[leNombre]._x, this->CoonPatchVector[leNombre]._y, this->CoonPatchVector[leNombre]._z);
+	//	if (i == 4) {
+	//		glEnd();
+	//		i = 0;
+	//	}
+	//}
 }
 
 void Spline::ChangeColorOfVertex(Color col)
@@ -140,13 +191,13 @@ void Spline::chaikin(int iteration) {
 void Spline::coons() {
 	//Interpolation lineaire AB + Interpolation lineaire de CD - interpolation billineaire de ABCD i.25
 	Point temp;
-	float iter = 0.25;
+	float iter = 0.33;
 	
 	splineVector = SplineManager::SplineList;
 	//Interpolation lineaire AB
 	int count=0;
 	for (int i = 0; i < ((int)this->vertex.size());i++) {
-		for (float inc = 0; inc < 1; inc=inc+iter) {
+		for (float inc = 0; inc <= 1; inc=inc+iter) {
 			count++;
 			temp._x = (1 - inc)*splineVector[1].vertex[i]._x + inc*splineVector[3].vertex[i]._x;
 			temp._y = (1 - inc)*splineVector[1].vertex[i]._y + inc*splineVector[3].vertex[i]._y;
@@ -154,7 +205,7 @@ void Spline::coons() {
 			coonsVector1.push_back(temp);
 		}
 		//Interpolation lineaire CD
-		for (float inc = 0; inc < 1; inc = inc + iter) {
+		for (float inc = 0; inc <= 1; inc = inc + iter) {
 			temp._x = (1 - inc)*splineVector[0].vertex[i]._x + inc*splineVector[2].vertex[i]._x;
 			temp._y = (1 - inc)*splineVector[0].vertex[i]._y + inc*splineVector[2].vertex[i]._y;
 			temp._z = (1 - inc)*splineVector[0].vertex[i]._z + inc*splineVector[2].vertex[i]._z;
